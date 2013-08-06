@@ -123,18 +123,22 @@ public class PackageClassIterator implements Iterator<Class<?>> {
     private static Set<Class<?>> getFromJARFile(String jar, String packageName) throws IOException, ClassNotFoundException {
         Set<Class<?>> classes = new HashSet<Class<?>>();
         JarInputStream jarFile = new JarInputStream(new FileInputStream(jar));
-        JarEntry jarEntry;
-        do {
-           jarEntry = jarFile.getNextJarEntry();
-           if (jarEntry != null) {
-              String className = jarEntry.getName();
-              if (className.endsWith(".class")) {
-                 className = stripFilenameExtension(className);
-                 if (className.startsWith(packageName))             
-                     classes.add(Class.forName(className.replace('/', '.')));
-              }
-           }
-        } while (jarEntry != null);
+        try {
+          JarEntry jarEntry;
+          do {
+             jarEntry = jarFile.getNextJarEntry();
+             if (jarEntry != null) {
+                String className = jarEntry.getName();
+                if (className.endsWith(".class")) {
+                   className = stripFilenameExtension(className);
+                   if (className.startsWith(packageName))             
+                       classes.add(Class.forName(className.replace('/', '.')));
+                }
+             }
+          } while (jarEntry != null);
+        } finally {
+          jarFile.close();
+        }
         return classes;
      }    
     

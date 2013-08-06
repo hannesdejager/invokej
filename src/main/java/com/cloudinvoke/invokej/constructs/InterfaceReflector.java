@@ -3,7 +3,7 @@ package com.cloudinvoke.invokej.constructs;
 import java.util.Iterator;
 
 /**
- * Objects that fullfil the requirements of this interface can provide interfaces to a requester if the 
+ * Objects that fulfill the requirements of this interface can provide interfaces to a requester if the 
  * object implements the interface either through inheritance (statically) or containment/aggregation (dynamically).
  * <p>
  * A requester can basically ask an class via InterfaceReflector: "Hey I need an interface of type X, can you give me a workable 
