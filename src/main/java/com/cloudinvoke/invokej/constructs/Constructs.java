@@ -1,12 +1,13 @@
-package com.cloudinvoke.invokej;
+package com.cloudinvoke.invokej.constructs;
 
-import com.cloudinvoke.invokej.constructs.Transform;
 
 /**
+ * Helper methods for this package.
+ * 
  * @author Hannes de Jager
  * @since 22 May 2013 
  */
-public class Invoke {
+public class Constructs {
 
 	private static Transform<?, ?> IDENTITY_TRANSFORM = new Transform<Object, Object>() {
 		public Object transform(Object input) {

@@ -1,4 +1,4 @@
-package com.cloudinvoke.invokej;
+package com.cloudinvoke.invokej.structs;
 
 
 /**
@@ -10,10 +10,10 @@ package com.cloudinvoke.invokej;
 public class Pair<LEFT_TYPE, RIGHT_TYPE> {
 
     /** The left or first object in the pair. */
-    private LEFT_TYPE left;
+    public LEFT_TYPE left;
     
     /** The right or second object in the pair. */
-    private RIGHT_TYPE right;
+    public RIGHT_TYPE right;
     
     
     /**
@@ -24,10 +24,6 @@ public class Pair<LEFT_TYPE, RIGHT_TYPE> {
         this.right = right;
     }
     
-    /**
-     * {@inheritDoc}
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj ) {
         if (!(obj instanceof Pair))
@@ -35,20 +31,6 @@ public class Pair<LEFT_TYPE, RIGHT_TYPE> {
 
         Pair<?, ?> other = (Pair<?, ?>)obj ;
         return other.left == left && other.right == right;
-    }
-    
-    /**
-     * @return the left
-     */
-    public final LEFT_TYPE getLeft() {
-        return left;
-    }
-    
-    /**
-     * @return the right
-     */
-    public final RIGHT_TYPE getRight() {
-        return right;
     }
     
     @Override

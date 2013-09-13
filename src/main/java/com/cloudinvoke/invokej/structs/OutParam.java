@@ -1,4 +1,4 @@
-package com.cloudinvoke.invokej;
+package com.cloudinvoke.invokej.structs;
 
 /**
  * A wrapper for objects to simulate out parameters in Java i.e. where you want to 
@@ -13,7 +13,7 @@ package com.cloudinvoke.invokej;
 public class OutParam<TYPE> {
 
     /** Stored the parameter. */
-    private TYPE value;
+    public TYPE value;
     
     public OutParam() { }
     
@@ -21,17 +21,4 @@ public class OutParam<TYPE> {
     	this.value = initialValue;
     }
     
-    /**
-     * Gets the parameter
-     */
-    public TYPE get() {
-        return value;
-    }
-
-    /**
-     * Sets the parameter
-     */
-    public void set(TYPE val) {
-        value = val;
-    }
 }

@@ -50,11 +50,4 @@
   
   </build>
   
-  <distributionManagement>
-	<repository>
-		<id>3rd party</id>
-		<url>http://jupiter/nexus/content/repositories/thirdparty</url>
-	</repository>
-  </distributionManagement>  
-  
 </project>
