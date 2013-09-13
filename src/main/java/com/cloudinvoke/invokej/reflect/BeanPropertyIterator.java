@@ -12,10 +12,8 @@ import com.cloudinvoke.invokej.it.Itq;
  * 
  * @author Hannes de Jager
  * @since 28 Jan 2009
- * 
- * TODO: Filter for static/nonstatic
  */
-public class BeanMethodIterator implements Iterable<Method> {
+public class BeanPropertyIterator implements Iterable<BeanProperty> {
     
     private static final int MODIFIER_FILTER = (Modifier.PUBLIC | Modifier.STATIC);
     private static final int MODIFIER_EXPECTED = Modifier.PUBLIC;
@@ -82,39 +80,21 @@ public class BeanMethodIterator implements Iterable<Method> {
     private final Scope scope;
     private final Class<?> theClass;
 
-    /**
-     * Constructor. 
-     *
-     * @param theClass
-     * @param what
-     */
-    public BeanMethodIterator(Class<?> theClass, Filter what, Scope scope) {
+    public BeanPropertyIterator(Class<?> theClass, Filter what, Scope scope) {
         this.filter = what;
         this.theClass = theClass;
         this.scope = scope;
     }
     
-    /**
-     * Constructor. 
-     */
-    public BeanMethodIterator(Class<?> theClass) {
+    public BeanPropertyIterator(Class<?> theClass) {
         this(theClass, Filter.BOTH, Scope.PARENTS_ALSO);
     }
     
-    /**
-     * Tells if a method is public
-     * @param method
-     * @return
-     */
     private static boolean isPublic(Method method) {
         return (method.getModifiers() & MODIFIER_FILTER) == MODIFIER_EXPECTED; 
     }
     
-    /**
-     * {@inheritDoc}
-     * @see java.lang.Iterable#iterator()
-     */
-    public Iterator<Method> iterator() {
+    public Iterator<BeanProperty> iterator() {
         return Itq
             .from(this.scope.getMethods(this.theClass))
             .where(new Transform<Method, Boolean>() {
@@ -122,6 +102,11 @@ public class BeanMethodIterator implements Iterable<Method> {
                     return isPublic(input) && filter.condition.transform(input);
                 }
             })
+            .select(new Transform<Method, BeanProperty>() {
+            	public BeanProperty transform(Method input) {
+            		return new BeanProperty(input);
+            	}
+			})
             .iterator();
     }
     
